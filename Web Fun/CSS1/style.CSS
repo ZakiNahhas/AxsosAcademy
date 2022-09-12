@@ -1,0 +1,19 @@
+h1 {
+    background-color: black;
+    text-align: left;
+    color: aliceblue;
+}
+h2 {
+    background-color: rebeccapurple;
+    text-align: center;
+    font-style: italic;
+    font-weight: 100;
+    color: white;
+}
+h3 {
+    background-color: powderblue;
+    color: black;
+    text-decoration: underline;
+    text-align: right;
+    /* overflow: scroll; */
+}

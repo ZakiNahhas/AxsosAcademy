@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://kit.fontawesome.com/ebf046dde0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <h1 class="nav-title">Profile</h1>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#" class="active">My Profile</a></li>
+                <li><a href="#">Find Connections</a></li>
+            </ul>
+            <button class="btn">Sign Out</button>
+        </div>
+    </header>
+    <main>
+        <div class="card">
+            <div class="profile">
+                <img class="userCircle" src="user-circle.png" alt="user circle">
+                <h2>Zaki Nahhas</h2>
+                <br>
+            </div>
+            <div class="location">
+                <img class="icons" src="map-marker.png" alt="image of a map map-marker">
+                <h3>Ramallah</h3>
+            </div>
+                <br>
+            <div class="description">
+                <p>Professional | Developer | Master | The best
+                    <br>Master of the shadows of the internet
+                </p>
+            </div>
+            <br>
+            <div class="edit">
+                <img class="icons" src="gear.png" alt="gear icon"> <a onclick="func1()" href="#">edit profile</a>
+            </div>
+        </div>
+        </div>
+        
+        <div class="requests">
+
+            <div><h4><span class="two" id="count1">2</span>Contact Requests</h4></div>
+            <ul>
+                <li id="del" >SpongeBob <span class="icon text"><i class="fa-solid fa-circle-check" onclick="hide1()"></i> </span> <span class="text"><i class="fa-solid fa-circle-xmark" onclick="hide()"></i></span></li>
+                <br>
+                <li id="del" >Abed Al-Rahman <span class="icon text"><i class="fa-solid fa-circle-check" onclick="hide1()"></i> </span> <span class="text"><i class="fa-solid fa-circle-xmark" onclick="hide()"></i></span></li>
+            </ul>
+        </div>
+        
+    </main>
+    <div>
+    <div class="connections">
+        <div><h4><span class="number" id="count22">500+</span> Your Connections</h4></div>
+        <ul>
+            <li><span><i class="fa-solid fa-circle-user"></i></span> Joey  </li>
+            <br>
+            <li><span><i class="fa-solid fa-circle-user"></i></span> Ross  </li>
+            <br>
+            <li><span><i class="fa-solid fa-circle-user"></i></span> Monica </li>
+            <br>
+            <li><span><i class="fa-solid fa-circle-user"></i></span> Chandler </li>
+            <hr class="hr">
+            <a href="#" class="txt">View More</a>
+        </ul>
+    </div>
+    </div>
+    <div class="education">
+    <div><h5 class="back">Education</h5></div>
+            <ul style="line-height: 3em;">
+                <li>Coding Dojo - Full stack bootcamp</li>
+                <li>August 2022 - January 2023</li>
+                <li>Triple black belt in Python, MERN, and C#...</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

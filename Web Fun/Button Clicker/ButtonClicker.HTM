@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+        <div class="nav">
+            <h1>Dojonary</h1>
+            <input style="width: 40%; height: 2em; margin-top: .5em; 
+            border: 2px solid black;" 
+            type="text" id="search" name="search" placeholder=" Search">
+            <input onclick=this.value='Logout' class="btn" type="submit" value="Login">
+        </div>
+        <div class="ninja1">
+            <div>
+                <h2>ninja</h2>
+                <ul>
+                    <li><i>noun</i></li>
+                    <li>plural:<i>ninjas</i></li>
+                </ul>
+                <button onclick="alert('Ninja was liked')" class="likes">13 likes</button>
+            </div>
+            <p>Lorem ipsum dolor, <a href="">consectetur</a> adipisicing <a href=""> elit</a>.</p>            
+        </div>
+        <div class="dojonary">
+            <h2>Dojonary is defined by <span class="bolder">YOU</span></h2>
+            <button id="add" onclick="hide(this)">Add definition</button>
+        </div>
+        <div class="ninja2">
+            <div class="definition">
+                <h2>ninja</h2>
+                <ul>
+                    <li><i>noun</i></li>
+                    <li>plural:<i>ninjas</i></li>
+                </ul>
+                <button onclick="alert('Ninja was liked')" class="likes">37 likes</button>
+            </div>
+            <p>Lorem ipsum Zaki, <a href="">consectetur</a> adipisicing <a href=""> elit</a>.</p>            
+        </div>
+    </div>
+    <script src="Buttons.js"></script>
+  </body>
+</html>

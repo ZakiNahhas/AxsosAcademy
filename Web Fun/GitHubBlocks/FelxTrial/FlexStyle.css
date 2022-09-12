@@ -1,0 +1,25 @@
+.main {
+    width: 800px;
+    height: 400px;
+    background-color: blue;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+.child1 {
+    flex: 5;
+    height: 200px;
+    background-color: red;
+    border: 1px solid black;
+    
+
+}
+.child2 {
+    flex:3;
+    height: 200px;
+    background-color: red;
+    border: 1px solid black;
+
+}

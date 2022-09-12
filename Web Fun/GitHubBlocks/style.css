@@ -1,0 +1,49 @@
+.container {
+
+    background-color: silver;
+    
+}
+
+.flex1  {
+    display: flex;
+    justify-content: space-around;
+    background-color: aqua;
+    margin: 10px;
+    
+}
+.flex2  {
+    display: flex;
+    justify-content: space-around;
+    background-color: pink;
+    margin: 10px;
+}
+.flex3  {
+    display: flex;
+    justify-content: space-around;
+    background-color: antiquewhite;
+    margin: 10px;
+}
+.back {
+    max-width: 40vw;
+    max-height: 40vw;
+    background-color: rgb(95, 51, 136);
+}
+.back2 {
+    max-width: 40vw;
+    max-height: 40vw;
+    background-color: aquamarine;
+}
+h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+h5 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+.margpad {
+    margin: 10px 10px 10px 10px;
+}
+.back3 {
+    background-color: black;
+}

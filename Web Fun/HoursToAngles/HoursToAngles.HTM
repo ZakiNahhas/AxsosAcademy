@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function clockHandAngles(seconds) {
+            var secs = 0;
+            var mins = 0;
+            var hours = 0;
+    hours = Math.floor(seconds/3600);
+    mins=Math.floor((seconds-hours*3600) /60);
+    secs=seconds-hours*3600-mins*60
+    console.log(hours, mins, secs);
+    console.log("hours angle=", hours*30);
+    console.log("minutes angle=", mins*6);
+    console.log("seconds angle=", secs*6);
+}
+
+clockHandAngles(4444)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

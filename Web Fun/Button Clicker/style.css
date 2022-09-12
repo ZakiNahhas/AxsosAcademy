@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "roboto";
+    font-weight: 400;
+}
+
+.container {
+    width: 30em;
+    display: grid;
+    grid-template-rows: 6rem, repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 'nav nav nav nav'
+    'ninja ninja ninja def'
+    'dojo dojo dojo fav';
+    grid-gap: 1em;
+    margin: 0px auto;
+}
+
+.nav {
+    grid-area: nav;
+    display: flex;
+    justify-content: space-around;
+    background-color: #cccccc;
+    padding-bottom: .5em;
+}
+
+.ninja1,.ninja2 {
+    grid-area: ninja;
+    border: 1px solid black;
+    display: flex;
+    padding: 1em;
+    width: 17em;
+}
+.ninja1 ul, li{
+    list-style: none;
+    padding: .1rem;
+}
+
+.likes {
+    text-align: center;
+    height: 2em;
+    width: 5em;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: #ffd966;
+    border: 2px solid black;
+    box-shadow: 2px 3px black;
+}
+
+.ninja2 {
+    grid-area: dojo;
+    width: 17em;
+    margin-bottom: 2em;
+}
+
+p {
+    align-self: center;
+    padding-left: 1rem;
+}
+
+.dojonary {
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: .2rem;
+    width: 9em;
+    height: 7.5em;
+}
+
+#add {
+    display: block;
+    align-self: center;
+    width: 8em;
+    background-color: #93c47d;
+    padding: .2rem;
+    border: 2px solid black;
+    box-shadow: 2px 3px black;
+    margin-bottom: 1em;
+}
+
+.btn {
+    align-self: center;
+    background-color: #2b78e4;
+    width: 5em;
+    height: 2em;
+    border: 2px solid black;
+    box-shadow: 2px 3px black;
+    color: white;
+}
+
+h2 {
+    font-weight: 800;
+}
+
+.bolder {
+    font-weight: 1000;
+}

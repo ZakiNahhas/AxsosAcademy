@@ -1,0 +1,9 @@
+#count{
+    background-color: aquamarine;
+    color: rgb(255, 206, 143);
+    padding: 10px;
+}
+.dark-mode{
+    background-color: black;
+    color: white;
+}
