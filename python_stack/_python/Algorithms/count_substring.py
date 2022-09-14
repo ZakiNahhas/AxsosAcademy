@@ -9,3 +9,9 @@ def count_substring(str, sub_str):
     return count
 
 print(count_substring("ABSHIZLHIZMSHIZ", "HIZ"))
+
+def count_substr(string, substr):
+    x = string.rsplit(substr)
+    return len(x)-1
+
+print(count_substr("HIZASRASGHIZASFHIZ", "HIZ"))
