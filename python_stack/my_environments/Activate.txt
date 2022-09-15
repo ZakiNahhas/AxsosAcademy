@@ -1,0 +1,5 @@
+call C:\Users\zakin\Desktop\AxsosAcademy\python_stack\my_environments\py3Env\Scripts\activate
+
+or
+
+py3Env\Scripts\activate.bat

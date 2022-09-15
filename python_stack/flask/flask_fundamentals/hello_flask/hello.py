@@ -7,7 +7,7 @@ app = Flask(__name__)    # Create a new instance of the Flask class called "app"
 # def success():
 #   return "success"          # Return the string 'Hello World!' as a response
 @app.route('/')                           
-def hello_world():
+def hello_worl():
     return render_template('index.html', phrase="hello", times=5)
 if __name__=="__main__":   # Ensure this file is being run directly and not from a different module    
-    app.run(debug=True)    # Run the app in debug mode.
+    app.run(debug=True)  
