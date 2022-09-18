@@ -16,11 +16,19 @@
         
      {% for i in range(0, value2): %}
      {%if x % 2 == 0: %}
-        <div class="col" style="background-color:{{color1}};">2</div>
-     
-     {%else%}
-        <div class="col2" style="background-color:{{color2}};">1</div>
-        {%endif%}
+            {% if i%2==0 %}
+                <div class="col" style="background-color:{{color1}};">2</div>
+            
+            {%else%}
+                <div class="col2" style="background-color:{{color2}};">1</div>
+            {%endif%}
+    {% else %}
+            {% if i%2==1 %}
+            <div class="col" style="background-color:{{color1}};">2</div>
+            {% else %}
+            <div class="col2" style="background-color:{{color2}};">2</div>
+            {%endif%}
+    {%endif%}
     {% endfor %}
     </div>
     {% endfor %}
