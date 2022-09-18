@@ -5,8 +5,7 @@
 
 
 .row {
-    display: flex;
-    
+    display: flex;    
 }
 .col {
     background-color: {{color1}};
