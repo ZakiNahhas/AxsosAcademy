@@ -11,4 +11,4 @@ def table():
     return render_template("table.html", tableinfo=myTable, table=myTable[0])
 
 if __name__=="__main__":  
-    app.run(debug=True)  
+    app.run(debug=True)
