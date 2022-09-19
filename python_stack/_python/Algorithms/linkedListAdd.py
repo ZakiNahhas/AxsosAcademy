@@ -1,6 +1,3 @@
-from locale import currency
-
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -21,6 +18,19 @@ class LinkedList:
             while current.next is not None:
                 current = current.next
             current.next = Node(value)
+    def deleteNode(self, position):
+        if position == 0:
+         temp = self.head
+         self.head = self.head.next
+         temp = None
+        else:
+            current=self.head
+            for x in range(position-1):
+                current= current.next
+            current.next = current.next.next
+              
+
+                
                     
 list1 = LinkedList()
 list1.head = Node(141)
@@ -31,6 +41,5 @@ list1.head.next = n2
 n2.next = n3
 n3.next = n4
 list1.insertNodeAtTail(145)
+list1.deleteNode(2)
 list1.traverse()
-
-# delete = current.next = current.next.next
