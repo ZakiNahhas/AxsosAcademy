@@ -1,0 +1,9 @@
+C:\Users\zakin>call C:\Users\zakin\Desktop\AxsosAcademy\python_stack\my_environments\djangoPy3Env\Scripts\activate
+
+(djangoPy3Env) C:\Users\zakin>cd C:\Users\zakin\Desktop\AxsosAcademy\python_stack\django\django_intro
+
+(djangoPy3Env) C:\Users\zakin\Desktop\AxsosAcademy\python_stack\django\django_intro>cd myFirstProject
+
+(djangoPy3Env) C:\Users\zakin\Desktop\AxsosAcademy\python_stack\django\django_intro\myFirstProject>python manage.py startapp myFirstApp
+
+(djangoPy3Env) C:\Users\zakin\Desktop\AxsosAcademy\python_stack\django\django_intro\myFirstProject>

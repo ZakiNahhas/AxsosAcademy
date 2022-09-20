@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Our From!</h1>
+        <!-- <form methods="post" action="mailto: zakinahhas97@outlook.com"> -->
+        <form action="/handlesubmit" method="post">
+            {% csrf_token %}
+            <p>Username:<input type="text" name="Username"></p>
+            <p>Email:<input type="text" name="Email"></p>
+            <p><select name="fav">
+                <option value="blue">blue</option>
+                <option value="green">green</option>
+                <option value="red">red</option>
+            </select></p>
+            <input type="submit" value="send data">
+        </form>
+</body>
+</html>
+

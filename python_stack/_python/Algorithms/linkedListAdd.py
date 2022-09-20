@@ -1,7 +1,7 @@
 class Node:
     def __init__(self, value):
         self.value = value
-        self.next = None
+        self.next = None 
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -28,18 +28,46 @@ class LinkedList:
             for x in range(position-1):
                 current= current.next
             current.next = current.next.next
+    def reverseList(self):
+        previous = None
+        current = self.head
+        while current is not None:
+            nextNode = current.next
+            current.next = previous
+            previous = current
+            current = nextNode
+        self.head= previous
+            
+        # current = self.head
+        # list_ = [current.value]
+        # while current.next is not None:
+        #     current = current.next
+        #     list_.append(current.value)
+        # return list_[::-1]
+    
+    
+    
+    
+        
               
 
                 
                     
 list1 = LinkedList()
-list1.head = Node(141)
+list1.head= Node(141)
 n2 = Node(142)
 n3 = Node(143)
 n4 = Node(144)
 list1.head.next = n2
 n2.next = n3
 n3.next = n4
-list1.insertNodeAtTail(145)
-list1.deleteNode(2)
+# list1.insertNodeAtTail(145)
+# list1.deleteNode(2)
+# list1.traverse()
+list2 = LinkedList()
+list1.reverseList()
 list1.traverse()
+# for elem in list1.revList():
+#     list2.insertNodeAtTail(elem)
+    
+# list2.traverse()
