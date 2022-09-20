@@ -1,0 +1,18 @@
+h4 {
+    margin-left: 45%;
+    text-align: center;
+    width: 10em;
+    border: 2px solid rgb(0, 68, 255);
+    color: red;
+}
+div {
+    font-family: monospace;
+    margin-left: 32%;
+    text-align: center;
+    width: 9em;
+    height: 1em;
+    padding: 2em;
+    border: 2px solid rgb(255, 0, 0);
+    font-size: 35px;
+    color: blue;
+}
