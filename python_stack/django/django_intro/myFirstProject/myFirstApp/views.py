@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 
 # Create your views here.
 def method1(request):
@@ -23,3 +23,9 @@ def handle(request):
         'fav': request.POST['fav']
     }
     return render(request, 'result.html', context)
+def visits(request):
+    if 'counter' not in request.session:
+        request.session['counter']= 1
+    else:
+        request.session['counter']=+1
+    return render(request, 'something.html')

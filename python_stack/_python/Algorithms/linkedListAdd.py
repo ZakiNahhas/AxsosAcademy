@@ -37,13 +37,32 @@ class LinkedList:
             previous = current
             current = nextNode
         self.head= previous
-            
         # current = self.head
         # list_ = [current.value]
         # while current.next is not None:
         #     current = current.next
         #     list_.append(current.value)
         # return list_[::-1]
+    def insertAtPos(self, value, pos):
+        
+        if pos == 1:
+            Node1 = Node(value)
+            Node1.next = self.head
+            self.head = Node1
+        else:
+            current = self.head
+            for i in range(pos-1):
+                current = current.next
+            Node1= Node(value)
+            Node1.next = current.next
+            current.next = Node1
+            
+        # if midNode is None:
+        #     print("LinkedList is empty")
+        #     return
+        # newNode = Node(newNode)
+        # newNode.next = midNode.next
+        # midNode.next = newNode
     
     
     
@@ -66,7 +85,9 @@ n3.next = n4
 # list1.traverse()
 list2 = LinkedList()
 list1.reverseList()
+list1.insertAtPos(146, 4)
 list1.traverse()
+
 # for elem in list1.revList():
 #     list2.insertNodeAtTail(elem)
     

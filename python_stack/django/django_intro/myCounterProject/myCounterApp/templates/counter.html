@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align:center; margin-top: 18%;">Counter</h1>
+   <span style="margin: 49.5%; background-color:rgb(156, 171, 166); border:2px solid rgb(255, 255, 110); color:rgb(192, 62, 62); ">{{request.session.count}}</span> 
+   <form action="/increment2", methods="post">
+    <input style="background-color: rgb(255, 255, 110); margin-left:48%;margin-top:4%;" type="submit" value="Add 2">
+   </form>
+   <form style="margin: 10px;" action="/reset">
+    <input style="background-color: rgb(192, 62, 62); margin-left:48%;" type="submit" value="Reset">
+   </form>
+
+</body>
+</html>
