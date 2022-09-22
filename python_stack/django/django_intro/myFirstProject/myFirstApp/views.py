@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from .models import User
 
 # Create your views here.
 def method1(request):
@@ -17,12 +18,8 @@ def method3(request):
 def rendForm(request):
     return render(request, 'form.html')
 def handle(request):
-    context = {
-        'Username': request.POST['Username'],
-        'Email': request.POST['Email'],
-        'fav': request.POST['fav']
-    }
-    return render(request, 'result.html', context)
+    User.objects.create(username=request.POST['Username'], email=request.POST['Email'], color=request.POST['fav'])
+    return redirect('first')
 def visits(request):
     if 'counter' not in request.session:
         request.session['counter']= 1
