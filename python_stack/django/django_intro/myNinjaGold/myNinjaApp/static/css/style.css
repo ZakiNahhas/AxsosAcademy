@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: cursive;
+}
+.flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.box {
+    line-height: 3;
+    text-align: center;
+    margin-top: 2em;
+    width: 12em;
+    height: 10em;
+    border: 2px solid black;
+}
+h3 {
+    margin-left: 10px;
+    line-height: 2.5;
+}
+.input {
+    width: 5%;
+}
+.btn {
+    cursor: pointer;
+    background-color: aquamarine;
+    width: 6em;
+    box-shadow: 2px 3px black;
+}
+h4 {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+.reset {
+    margin-top: 2%;
+    margin-left: 4%;
+}
+.text {
+    height: 100px;
+    border: 2px solid black;
+    overflow: scroll;
+    margin-top: 3%;
+}

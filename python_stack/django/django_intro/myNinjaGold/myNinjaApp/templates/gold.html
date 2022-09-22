@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ninja Gold</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  </head>
+  <body>
+    <h3>Your Gold: <input class="input" type="text" placeholder={{request.session.money}}></h3>
+    <div class="flex">
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <div class="box">
+            <input type="hidden" name="money" value="farm">
+            <p>Farm</p>
+            <p>(earns 10-20 gold)</p>
+            <input class="btn" type="submit" value="Find Gold!">
+            
+        </div>
+    </form>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <div class="box">
+            <input type="hidden" name="money" value="cave">
+            <p>Cave</p>
+            <p>(earns 10-20 gold)</p>
+            <input class="btn" type="submit" value="Find Gold!">
+        </div>  
+    </form>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <div class="box">
+            <input type="hidden" name="money" value="house">
+            <p>House</p>
+            <p>(earns 10-20 gold)</p>
+            <input class="btn" type="submit" value="Find Gold!">
+        </div>
+    </form>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <div class="box">
+            <input type="hidden" name="money" value="quest">
+            <p>Quest</p>
+            <p>(earns/takes 10-50 gold)</p>
+            <input class="btn" type="submit" value="Find Gold!">
+        </div>
+    </form>
+    </div>
+    <form class="reset" action="/reset">
+        <input class="btn" type="submit" value="Reset ME!">
+    </form>
+    <h4>Activites:</h4>
+        
+        <div class="text" name="activities">
+            {% for elem in request.session.activities reversed%}
+            {% if 'failed' in elem %}
+            <p style="color:red ;">{{elem}}</p>
+            {% else %}
+            <p style="color: green;">{{elem}}</p>
+            {%endif%}
+            {% endfor %}
+        </div>
+  </body>
+</html>
