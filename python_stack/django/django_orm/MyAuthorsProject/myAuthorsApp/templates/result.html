@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Author Show</title>
 </head>
 <body>
     <p>{{book.id}}</p>
     <p>{{book.title}}</p>
-    {% for pub in book.publishers.all %}
-    <p>>>{{pub.name}}</p>
+    <p>{{book.description}}</p>
+    {% for authors in book.authors.all %}
+    <p>>>{{authors.firstname}} {{authors.lastname}}</p>
     {%endfor%}
 
-    <form action="/pubToBook/{{book.id}}" method="POST">
+    <form action="/auth_to_book/{{book.id}}" method="post">
         {%csrf_token%}
-        <select name="pubToBook">
-            {% for pub in publishers %}
-            {%if pub not in book.publishers.all%}
-            <option value="{{pub.id}}">{{pub.name}}</option>
-            {%endif%}
+        <select name="authToBook">
+            {% for auth in authors %}
+            
+            <option value="{{auth.id}}">{{auth.firstname}}</option>
+            
             {%endfor%}
         </select>
-        <input type="submit" value="Add publisher">
+        <input type="submit" value="Add Author">
     </form>
 </body>
 </html>

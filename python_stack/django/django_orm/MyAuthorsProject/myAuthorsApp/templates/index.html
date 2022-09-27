@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/addBook" method="POST">
+    <form action="/add_book" method="POST">
         {%csrf_token%}
-        <p><input type="text" name="title"></p>
+        <h1>Add a book</h1>
+        <p>Title<input type="text" name="title"></p>
+        <p>Description<textarea name="description" cols="40" rows="5"></textarea></p>
         <p><input type="submit" value="Send Me!"></p>
     </form>
     <hr>
