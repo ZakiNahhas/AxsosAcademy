@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show authors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
 </head>
 <body>
     <p>{{authors.id}}</p>
     <p>{{authors.firstname}} {{authors.lastname}}</p>
     <p>{{authors.notes}}</p>
     
-    <ul>
+    <ul class="list-group">
     {% for book in authors.books.all %}
-    <li>{{book.title}}</li>
-    @{{book.description}}
+    <li class="list-group-item list-group-item-action active">{{book.title}}</li>
+    <li class="list-group-item list-group-item-primary">{{book.description}}</li>
     {%endfor%}
     </ul>
 
@@ -22,8 +24,11 @@
         {%csrf_token%}
         <select name="bookToAuth">
             {% for book in books %}
+            {% if authors not in book.authors.all %}
             <option value="{{book.id}}">{{book.title}}</option>
+            {%endif%}
             {%endfor%}
+           
         </select>
         <p><input type="submit" value="Add Book"></p>
     </form>
