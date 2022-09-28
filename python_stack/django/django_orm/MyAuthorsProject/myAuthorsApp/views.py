@@ -1,5 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect, HttpResponse
+from django.contrib import messages
 
 from .models import *
 
@@ -10,8 +11,14 @@ def index(request):
     return render(request, 'index.html', context)
 
 def add_book(request):
-    Book.objects.create(title = request.POST['title'], description = request.POST['description'])
+    errors = Book.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+            return redirect('/')
+        Book.objects.create(title = request.POST['title'], description = request.POST['description'])
     return redirect('/')
+        
 
 def view_books(request, id):
     context = {

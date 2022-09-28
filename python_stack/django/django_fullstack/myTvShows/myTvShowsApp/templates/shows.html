@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>All Shows</h1>
+    <table class="table table-striped" border=1>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Network</th>
+            <th>Release date</th>
+            <th style="text-align:center ;">actions</th>
+        </tr>
+    {% for show in shows %}
+    <tr>
+        <td>{{show.id}}</td> <td>{{show.title}}</td> <td>{{show.network}}</td> 
+        <td>{{show.release_date}}</td> <td><a style="border-right:2px solid black; padding-right:5px;" href="/shows/{{show.id}}">Show</a> <a href="/shows/{{show.id}}/edit">Edit</a></td> 
+        <td></td> 
+        <td><a href="/shows/{{show.id}}/destroy">Delete</a></td>
+    </tr>
+    {%endfor%}
+    </table>
+    <tr>
+        <td><a href="/shows/new">Add a New Show</a></td>
+    </tr>
+</body>
+</html>
