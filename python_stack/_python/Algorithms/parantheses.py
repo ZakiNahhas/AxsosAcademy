@@ -1,16 +1,18 @@
-str = "hsbd((fffG)s(s))("
-def isBalanced(str):
-    stack = []
-    for i in str:
-        if i =='(':
-            stack.append(i)
-        elif i ==')':
-            if len(stack) !=0:
-                stack.pop()
-            else:
-                return "unbalanced"
-    if len(stack) == 0:
-        return "balanced"
-    else: 
-        return "unbalanced"
-print(isBalanced(str))
+def paranth(str):
+    count1 = 0;
+    count2 = 0;
+    for i in range(0, len(str)):
+        if(str[0]==")"):
+            return False
+        if(str[len(str)-1]=="("):
+            return False
+        if(str[i] == "("):
+            count1+=1
+        elif(str[i] == ")"):
+            count2+=1
+    if(count1==count2):
+        return True
+    else:
+        return False
+
+print(paranth("(sdff)(sdghn)))((("))
