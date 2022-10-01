@@ -10,7 +10,14 @@ def show(request):
     return render(request, 'addshow.html')
 
 def create(request):
-    Show.objects.create(
+    
+    errors = Show.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/shows/new')
+    else:
+        Show.objects.create(
         title = request.POST['title'],
         network = request.POST['network'],
         release_date = request.POST['release_date'], 
@@ -18,6 +25,7 @@ def create(request):
         )
     show = Show.objects.last()
     return redirect(f'shows/{show.id}')
+    
 
 def displayShow(request, id):
     context = {
@@ -30,13 +38,19 @@ def edit(request, id):
     }
     return render(request, 'edit.html', context)
 def update(request):
-    show1 = Show.objects.get(id = request.POST['hidden'])
-    show1.title = request.POST['title']
-    show1.network = request.POST['network']
-    show1.release_date = request.POST['release_date']
-    show1.description = request.POST['description']
-    show1.save()
-    return redirect(f'shows/{show1.id}')
+    errors = Show.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return render(request, 'edit.html')
+    else:
+        show = Show.objects.get(id = request.POST['hidden'])
+        show.title = request.POST['title']
+        show.network = request.POST['network']
+        show.release_date = request.POST['release_date']
+        show.description = request.POST['description']
+        show.save()
+        return redirect(f'shows/{show.id}')
 def all_shows(request):
     context = {
         'shows': Show.objects.all()
