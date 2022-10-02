@@ -32,13 +32,13 @@
     </div>
         <div class="col-md-6">
         <label class="form-label"  for="release_date">Release Date</label>
-        <input class="form-control" type="date" name="release_date" value={{show.release_date | date:'Y-m-d'}}>
+        <input class="form-control" type="date" name="release_date" value="{{show.release_date | date:'Y-m-d'}}">
     </div>
     <div>
     </div>
         <div>
         <label class="form-label" for="description">Description</label>
-        <input class="form-control"  id="width" type="text" name="description" cols="40" rows="5" value="{{show.description}}">
+        <textarea class="form-control"  id="width" type="text" name="description" cols="40" rows="5">{{show.description}}</textarea>
     </div>
         <div>
         <input class="btn btn-success" type="submit" value="Update me!">

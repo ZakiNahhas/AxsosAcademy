@@ -1,7 +1,18 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 
+from myTvShowsApp.forms import ShowForm
+
 from .models import *
+
+def show_unique(request):
+    show = ShowForm(request.POST or None)
+    if form.is_valid():
+        form.save()  
+        form = ShowForm()
+    else:
+        return HttpResponse("kjkkk")
+    return render(request,'shows.html',{'form':show})
 
 def re_show(request):
     return redirect('/shows')
@@ -16,7 +27,9 @@ def create(request):
         for key, value in errors.items():
             messages.error(request, value)
         return redirect('/shows/new')
+    
     else:
+        
         Show.objects.create(
         title = request.POST['title'],
         network = request.POST['network'],
