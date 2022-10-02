@@ -16,7 +16,7 @@ class ShowManager(models.Manager):
         return errors
     
 class Show(models.Model):
-    title = models.CharField(max_length=75, unique=True, blank = False)
+    title = models.CharField(max_length=75, blank = False)
     network = models.CharField(max_length=4, blank=False)
     release_date = models.DateField(blank=True, null=True)
     description = models.TextField(default = "This is a show description ma nigga")
