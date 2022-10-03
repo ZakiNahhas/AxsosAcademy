@@ -25,7 +25,7 @@ def register(request):
         user=User.objects.last()
         request.session['firstname'] = user.firstname
         request.session["userid"] = user.id
-    return render(request, "success.html")
+    return redirect('/success')
 
 def login(request):
     existing_user = User.objects.filter(email=request.POST['email'])
@@ -52,9 +52,9 @@ def logout(request):
     return redirect('/')
 
 def success_page(request):
-    if "firstname" not in request.session:
+    if "userid" not in request.session:
         messages.error(request, "You must log in to view this page!")
-        return redirect('success')
+        return redirect('/')
     context = {
         "user": User.objects.get(id=request.session["userid"])
     }
