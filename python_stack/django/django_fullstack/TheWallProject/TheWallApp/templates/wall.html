@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+    <h1>Face Nook wall</h1>
+    <h3>Welcome {{request.session.firstname}}!</h3>
+    <div>
+        <a href="/">Logout</a>
+    </div>
+    </div>
+    <hr>
+    <br><br><br>
+    <div class="flex">
+    <form action="/wall/create_message" method="post">
+        {% csrf_token %}
+        <h2>Post a message</h2>
+        <br>
+        <textarea name="message_content" cols="80" rows="5"></textarea>
+        <div><input class="btn" type="submit" value="Post a message"></div>
+        <br>
+        
+        {% for message in messages%}
+        <p>{{message.user.firstname}}      -       {{message.created_at}}</p>
+        <p>{{message.message_content}}</p>
+        {% for comment in comments %}
+        <p>{{comment.user.firstname}} {{comment.user.lastname}}        -       {{comment.created_at}}</p>
+        <p>This is my comment:{{comment.comment_content}}</p>
+        {%endfor%}
+        <div class="flex2">
+            <form action="/wall/create_comment" method="post">
+                {% csrf_token %}
+                <h2>Post a comment</h2>
+                <textarea name="comment_content" cols="60" rows="3"></textarea>
+                <div><input class="btn2" type="submit" value="Post a comment"></div>
+            </form>
+        </div>
+        </div>
+        {%endfor%}
+    </form>
+    <br>
+</body>
+</html>
