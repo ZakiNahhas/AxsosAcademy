@@ -9,19 +9,27 @@ def wall(request):
         'messages': Message.objects.all(),
         'comments': Comment.objects.all()
     }
-    return render(request, "wall.html", context)
+    if 'userid' in request.session:
+            return render(request,'wall.html',context)
+    else:
+            return render(request,'form.html',context)
 
 def create_message(request):
-    user = User.objects.get(id = request.session['userid'])
     Message.objects.create(
-        message_content = request.POST['message_content'],
-        user=user
+        message_content=request.POST['message_content'],
+        user=User.objects.get(id=request.session['userid'])
     )
     return redirect('/wall')
 def create_comment(request):
-    user = User.objects.get(id = request.session['userid'])
     Comment.objects.create(
-        comment_content = request.POST['comment_content'],
-        user=user
+        comment_content=request.POST['comment_content'],
+        user=User.objects.get(id=request.session['userid']),
+        message=Message.objects.get(id=request.POST['hide2'])
     )
+    return redirect('/wall')
+
+def deletemsg(request):
+    
+    message=Message.objects.get(id=request.POST['hide1'])
+    message.delete()
     return redirect('/wall')

@@ -3,6 +3,9 @@
     padding: 0;
     font-family: monospace;
 }
+body {
+    background-color: rgb(117, 141, 145);
+}
 .container {
     display: flex;
     justify-content: space-between;
@@ -33,7 +36,32 @@ h3 {
     box-shadow: 2px 3px black;
     padding: 0.2rem;
 }
+.btn3 {
+    cursor: pointer;
+    margin-top: 1%;
+    margin-left: 37%;
+    background-color: rgb(255, 0, 0);
+    border: 2px solid black;
+    box-shadow: 2px 3px black;
+    padding: 0.2rem;
+}
 .flex2 {
     width: 90%;
     margin: 0 1em;
+}
+textarea {
+    border: 2px solid black;
+    box-shadow: 2px 3px 2px rgb(0, 0, 0);
+}
+.comments {
+    width: 30%;
+    background-color: rgb(158, 193, 199);
+    border-radius: 5px;
+    margin: 1%;
+    display: block;
+    padding: 1%;
+}
+ul li {
+    list-style: none;
+    margin-left: .5rem;
 }
