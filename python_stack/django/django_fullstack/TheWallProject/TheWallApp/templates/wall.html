@@ -28,7 +28,7 @@
         <div><input class="btn" type="submit" value="Post a message">
         </div>
        
-        
+        </form>
         {% for message in messages reversed %}
         <div>{{message.user.firstname}}      -       {{message.created_at}}</div>
         <div>{{message.message_content}}</div>

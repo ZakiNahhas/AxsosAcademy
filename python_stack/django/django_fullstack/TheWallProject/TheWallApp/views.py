@@ -9,7 +9,7 @@ def wall(request):
         'messages': Message.objects.all(),
         'comments': Comment.objects.all()
     }
-    if 'userid' in request.session:
+    if 'user_id' in request.session:
             return render(request,'wall.html',context)
     else:
             return render(request,'form.html')
