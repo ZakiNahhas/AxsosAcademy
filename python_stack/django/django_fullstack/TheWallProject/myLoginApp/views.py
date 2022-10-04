@@ -27,7 +27,7 @@ def register(request):
         )
         user = User.objects.last()
         request.session['firstname'] = user.firstname
-        request.session["userid"] = user.id
+        request.session["user_id"] = user.id
     return redirect('/success')
 
 
@@ -48,21 +48,21 @@ def login(request):
         return redirect('/')
 
     request.session['firstname'] = user.firstname
-    request.session["userid"] = user.id
+    request.session['user_id'] = user.id
     return redirect('/wall')
 
 
 def logout(request):
-    del request.session['userid']
+    del request.session['user_id']
     # request.session.pop("user_id")
     return redirect('/')
 
 
 def success_page(request):
-    if "userid" not in request.session:
+    if "user_id" not in request.session:
         messages.error(request, "You must log in to view this page!")
         return redirect('/')
     context = {
-        "user": User.objects.get(id=request.session["userid"])
+        "user": User.objects.get(id=request.session["user_id"])
     }
     return render(request, "success.html", context)

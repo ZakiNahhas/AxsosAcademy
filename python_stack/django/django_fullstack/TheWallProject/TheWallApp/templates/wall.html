@@ -25,27 +25,29 @@
         <h2>Post a message</h2>
         <br>
         <textarea name="message_content" cols="80" rows="5"></textarea>
-        <div><input class="btn" type="submit" value="Post a message"></div>
-        <br>
+        <div><input class="btn" type="submit" value="Post a message">
+        </div>
+       
         
-        {% for message in messages reversed%}
+        {% for message in messages reversed %}
         <div>{{message.user.firstname}}      -       {{message.created_at}}</div>
         <div>{{message.message_content}}</div>
-        {% if message.user.id == request.session.userid %}
+        {% if message.user.id == request.session.user_id %}
         <form action="/wall/deletemsg" method="post">
             {%csrf_token%}
             <input type="hidden" name="hide1"  value="{{message.id}}">
             <input class="btn3" type="submit" value="Delete">
         </form>
         {% endif %}
-        {% for comment in comments %}
-        {%if comment.messages.id == comment.id%}
-        <ul class="comments">{{comment.user.firstname}} {{comment.user.lastname}}  -  
-        {{comment.created_at}} <br><br>
-        {{comment.comment_content}}</ul>
-        {% endif %}
-        {%endfor%}
+            {% for comment in message.comments.all %}
+                {#{% if comment.messages.id == message.id %}#}
+            <ul class="comments">{{comment.user.firstname}} {{comment.user.lastname}}  -  
+            {{comment.created_at}} 
+            <li>{{comment.comment_content}}</li></ul>
+            {#{%endif%}#}
+            {%endfor%}
         <div class="flex2">
+           
             <form action="/wall/create_comment" method="post">
                 {% csrf_token %}
                 <h2>Post a comment</h2>
@@ -53,6 +55,7 @@
                 <textarea name="comment_content" cols="60" rows="3"></textarea>
                 <div><input class="btn2" type="submit" value="Post a comment"></div>
             </form>
+            
         </div>
         </div>
         {%endfor%}
