@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
 </head>
 <body>
-    <h1>Welcome, {{request.session.firstname}}</h1>
-    <a href="/logout">Logout</a>
-    <form action="edit_book" method="post">
+    <div class="flex"><h1>Welcome, {{request.session.firstname}}</h1>
+    <a href="/logout">Logout</a></div>
+    <br>
+    {% if book.uploaded_by.id == request.session.user_id %}
+    <form action="/update/{{book.id}}" method="post">
         {% csrf_token %}
         <div><label for="book_title">Title: </label>
         <input type="text" name="book_title" value="{{book.book_title}}">
@@ -23,7 +27,55 @@
         <textarea name="description" cols="40" rows="5">{{book.description}}</textarea>
         </div>
         <br>
-        <input type="submit" value="Update">
+        <input class="btn" type="submit" name="update" value="Update">
     </form>
+    {% else %}
+    <br>
+    <div class="flex2">
+        <div>
+    <h1>{{book.book_title}}</h1>
+    <br>
+    <table>
+        <tr>
+            <div>Added by:
+            {{book.uploaded_by.firstname}} {{book.uploaded_by.lastname}}</div>
+        </tr>
+        <br>
+        <tr>
+            <div>Added on :
+        {{book.created_at}}</div>
+        </tr>
+        <br>
+        <tr>
+        <div>Last updated on: 
+        {{book.updated_at}}</div>
+        </tr>
+        <br>
+        <tr>
+        <div>Description: 
+        {{book.description}}</div> 
+        </tr>
+    </table>
+        <br>
+        </div>
+    <div>
+        <h1>
+            Users Who Like this book:
+        </h1>
+
+        <ul>
+            {% for user1 in liked_by %}
+            {% if user1.id == request.session.user_id %}
+            <li> {{user1.firstname}} <a href="/un_fav/{{book.id}}">Un-Favorite</a></li>
+            {% endif %}
+        </ul>
+        <br>
+            {% if user not in liked_by %}
+            <a href="/add_to_fav/{{book.id}}">Add to Favorites</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </div>
+</div>
 </body>
 </html>

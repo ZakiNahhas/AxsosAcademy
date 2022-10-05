@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
@@ -63,24 +64,45 @@ def books(request):
     return render(request,'books.html',context)
     
 def add_book(request):
+    user=User.objects.get(id=request.session['user_id'])
     Book.objects.create(
         book_title = request.POST['book_title'],
         description = request.POST['description'],
-        # user=User.objects.get(id=request.session['user_id'])
+        uploaded_by = user
     )
+    last = Book.objects.last()
+    last.liked_by.add(user)
     return redirect('/books')
-# def logout(request):
-#     del request.session['user_id']
-#     del request.session['firstname']
-#     request.session.flush()
-#     return redirect('/')
 
-def edit(request):
-    book = Book.objects.get(id = request.session["user_id"])
-    new_book = Book.objects.create(
-        book_title = request.POST['book_title']
-        desciption = request.POST['description']
-    )
-    new_book = book
-    new_book.save()
-    return render(request, "edit.html")
+def edit(request, id):
+    book=Book.objects.get(id=id)
+    context = {
+            "books": Book.objects.all(),
+            "book":Book.objects.get(id = id),
+            "user":User.objects.get(id=request.session['user_id']),
+            "liked_by":book.liked_by.all(),
+    }
+    return render(request, "edit.html",context)
+
+def add_to_fav(request,id):
+    book=Book.objects.get(id=id)
+    user=User.objects.get(id=request.session['user_id'])
+    book.liked_by.add(user)
+
+    return redirect(f'/books/{id}')
+
+def un_fav(request,id):
+    book=Book.objects.get(id=id)
+    user=User.objects.get(id=request.session['user_id'])
+    book.liked_by.remove(user)
+
+    return redirect(f'/books/{id}')
+
+def update(request,id):
+    if request.POST['update'] == 'Update':
+        book=Book.objects.get(id=id)
+        book.book_title=request.POST['book_title']
+        book.description=request.POST['description']
+        book.save()
+        messages.success(request,"Update Completed successfully!")
+        return redirect(f'/books/{id}')
