@@ -32,7 +32,7 @@ def auth_to_book(request, id):
     book1 = Book.objects.get(id = int(id))
     auth1 = Author.objects.get(id = request.POST['authToBook'])
     book1.authors.add(auth1)
-    return redirect(f'/books/{id}' )
+    return redirect(f'/books/{id}')
 
 
 def view_authors(request, id):
