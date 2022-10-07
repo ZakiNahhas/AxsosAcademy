@@ -15,11 +15,11 @@
     <div class="container">
     <form action="add_book" method="post">
         {% csrf_token %}
+        <div>
         <table>
             <tr>
         <td><label for="book_title">Title: </label></td>
         <td><input type="text" name="book_title"></td>
-        </div>
         </tr>
         <br>
         <tr>
@@ -29,16 +29,23 @@
         </table>
         <br>
         <input type="submit" value="Add Book">
+    </div>
     </form>
 <br>
     <div>
-    <h2>All books</h2>
+    <h2 class="space">All books:</h2>
     {% for book in books %}
-    <div>
         <a href="/books/{{book.id}}">{{book.book_title}}</a>
-        <p>Added by: {{book.uploaded_by.firstname}}</p>
+        <p class="space">Added by: ({{book.uploaded_by.firstname}} {{book.uploaded_by.lastname}})</p>
+        {% if user in book.liked_by.all %}
+                        <a href="/favbooks/{{i.id}}">{{book.title}}</a>
+                        <p> (added by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} )</p>
+                        <span><p class="itlaic">this is one of your favorites</p></span>
+                    {% else %}
+           
+        {% endif %}
+    {%endfor%}  
     </div>
-    {%endfor%}
-    </div>
+</div>
 </body>
 </html>

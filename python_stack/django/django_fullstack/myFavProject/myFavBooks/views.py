@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
@@ -12,7 +11,12 @@ def index(request):
     return render(request, "form.html")
 
 def register(request):
+    
     errors = User.objects.basic_validator(request.POST)
+    users=User.objects.all()
+    for user in users:
+        if user.email==request.POST['email']:
+            errors['email']="This email already exsists"
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
@@ -68,8 +72,9 @@ def add_book(request):
     Book.objects.create(
         book_title = request.POST['book_title'],
         description = request.POST['description'],
-        uploaded_by = user
+        uploaded_by = user,
     )
+    
     last = Book.objects.last()
     last.liked_by.add(user)
     return redirect('/books')
@@ -106,3 +111,8 @@ def update(request,id):
         book.save()
         messages.success(request,"Update Completed successfully!")
         return redirect(f'/books/{id}')
+    
+    elif request.POST['update'] == 'Delete':
+        book=Book.objects.get(id=id)
+        book.delete()
+        return redirect('/books')

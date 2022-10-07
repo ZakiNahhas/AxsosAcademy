@@ -20,7 +20,7 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid black;
-    background-color: rgb(26, 130, 131);
+    background-color: rgb(189, 197, 197);
     padding: 5%;
 }
 ul li{
@@ -48,4 +48,15 @@ ul li{
     color: rgb(237, 174, 57);
     margin-right: 25%;
     text-align: right;
+}
+.btn1 {
+    cursor: pointer;
+    margin-top: 4%;
+    background-color: rgb(233, 19, 19);
+    padding: .2rem;
+    box-shadow: 2px 3px black;
+    border-radius: 5px;
+}
+.space {
+    margin-bottom:6%;
 }

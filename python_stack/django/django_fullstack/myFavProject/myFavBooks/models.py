@@ -1,5 +1,8 @@
+from email.policy import default
+from email.utils import localtime
 from django.db import models
 import re
+import datetime
 
 class UserManager(models.Manager):
     def basic_validator(self, postData):
@@ -15,6 +18,8 @@ class UserManager(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):          
             errors['email'] = "Invalid email address!"
+        if postData['birth_day'] > str(datetime.date(2009, 1, 1)):
+            errors["birth_day"] = "You must be +13"
         return errors
     
 class User(models.Model):
@@ -23,6 +28,7 @@ class User(models.Model):
     email = models.CharField(max_length=255, blank = False)
     password = models.CharField(max_length=75, blank = False)
     password_confirm = models.CharField(max_length=75, blank = False)
+    birth_day = models.DateField(default = localtime)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
