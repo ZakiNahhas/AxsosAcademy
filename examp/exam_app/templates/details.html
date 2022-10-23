@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="flex">
+        <h1 class="text1">Arbotrary</h1>
+        <a class="ancor" href="/my_trees">My Trees</a>
+        <h2>Welcome, {{request.session.firstname}}</h2>
+    </div>
+    <div class="flex">
+        <h2 class="text2">A site to track randomly planted trees</h2>
+        <a class="ancor2" href="/new/tree">Plant a tree</a>
+        <a class="ancor3" href="/logout">Logout</a>
+    </div>
+    <div class="place">
+        <h1>{{tree.species}} planted by {{tree.planted_by.firstname}}</h1>
+        <br>
+        <h2>Where : {{tree.location}}</h2>
+        <br>
+        <h2>When : {{tree.date_planted}}</h2>
+        <br>
+        <h2>Reason : {{tree.reason}}</h2>
+    </div>
+</body>
+</html>

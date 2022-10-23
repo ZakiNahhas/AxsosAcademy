@@ -1,0 +1,121 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body{
+	margin:0 auto;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 12px/18px 'Open Sans',sans-serif;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+}
+.flex2 {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid black;
+    background-color: rgb(26, 130, 131);
+    padding: 5%;
+}
+ul li{
+    margin-top: 1%;
+    margin-left: 12%;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+.btn {
+    cursor: pointer;
+    margin-top: 2%;
+    background-color: rgb(19, 140, 233);
+    padding: .2rem;
+    box-shadow: 2px 3px black;
+    border-radius: 3px;
+	color: #595d6f;
+}
+.text1 {
+	margin-top: 1%;
+    margin-left: 1%;
+}
+.text2 {
+    margin-left: 2%;
+}
+.ancor {
+    margin-left: 65%;
+}
+.ancor2 {
+    margin-left: 50%;
+    background-color: azure;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+    padding: .2rem;
+    box-shadow: 2px 3px black;
+}
+.ancor3 {
+    background-color: azure;
+    border: 2px solid black;
+    text-decoration: none;
+    color: black;
+    padding: .2rem;
+    box-shadow: 2px 3px black;
+}
+.messages {
+    color: rgb(255, 27, 27);
+    list-style:none;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    animation: animate 1.5s linear infinite;
+} 
+
+@keyframes animate{
+0%{
+    opacity: 0;
+}
+50%{
+    opacity: 0.7;
+}
+100%{
+    opacity: 0;
+}
+}
+.plant {
+    margin-left: 14%;
+    margin-top: 5%;
+}
+.table {
+    margin-top: 2%;
+    margin-left: 14%;
+}
+#table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+#table td, #table th {
+border: 1px solid #ddd;
+padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #04AA6D;
+color: white;
+}
+.place {
+    margin-top: 5%;
+    margin-left: 10%;
+}

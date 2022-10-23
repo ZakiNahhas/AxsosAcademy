@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="flex">
+        <h1 class="text1">Arbotrary</h1>
+        <a class="ancor" href="/my_trees">My Trees</a>
+        <h2>Welcome, {{request.session.firstname}}</h2>
+    </div>
+    <div class="flex">
+    <h2 class="text2">A site to track randomly planted trees</h2>
+    <a class="ancor2" href="/dashboard">Dashboard</a>
+    <a class="ancor3" href="/logout">Logout</a>
+</div>
+    <form action="/plant_me" method="post">
+        {% csrf_token %}
+        <h1 class="plant">Arbitrarily plant a tree</h1>
+        <div class="table">
+        <table>
+        <tr>
+            <td><label for="species">Species: </label></td>
+        <td><input type="text" name="species"></td>
+        </tr>
+        <tr>
+            <td><label for="location">Location: </label></td>
+            <td><input type="text" name="location"></td>
+        </tr>
+        <tr>
+            <td><label for="reason">Reason: </label></td>
+            <td><input type="text" name="reason"></td>
+        </tr>
+        <tr>
+            <td><label for="date_planted">Date planted: </label></td>
+            <td><input type="date" name="date_planted"></td>
+        </tr>
+        </table>
+        <input class="btn" type="submit" value="Plant">
+        </div>
+    </form>
+</body>
+</html>
