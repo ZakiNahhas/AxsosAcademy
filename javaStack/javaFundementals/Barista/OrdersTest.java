@@ -34,6 +34,7 @@ public class OrdersTest {
         order4.getItems().add(item4);
         order4.getItems().add(item4);
         order4.getItems().add(item4);
+        order4.addItem(item4);
         
         order4.display();
         order4.getStatusMessage();

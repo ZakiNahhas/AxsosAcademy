@@ -14,7 +14,7 @@ class Meth {
 
     public String getRandomLetter() {
         String[] arr = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-                "t", "u", "v", "w", "x", "y", "z", "%", "S", ")", "!", "#" };
+                "t", "u", "v", "w", "x", "y", "z", "%", "S", ")", "!", "#", "+" };
 
         int randLetter = rando.nextInt(arr.length);
         String randomLetter = arr[randLetter];

@@ -12,6 +12,9 @@ public Orders(String name, boolean ready, ArrayList<Items> items) {
     this.ready = ready;
     this.items = items;
 }
+public void addItem(Items newItem) {
+    items.add(newItem);
+}
 public void display() {
     System.out.println("Customer's name: " + this.name);
     double total = 0;

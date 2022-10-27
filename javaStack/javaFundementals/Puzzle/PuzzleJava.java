@@ -7,7 +7,7 @@ public class PuzzleJava {
         System.out.println("The random array is: " + tenRandomRolls);
         System.out.println(methods.getRandomLetter());
         System.out.println(methods.generatePassword());
-        System.out.println("Your cusomitzed password is: "+ methods.generatePassword(30));
+        System.out.println("Your cusomitzed password is: "+ methods.generatePassword(240));
         String[] arr = {"a","b","c","d","e","f"};
         methods.shuffeledArray(); 
     }
