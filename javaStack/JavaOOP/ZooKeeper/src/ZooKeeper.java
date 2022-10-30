@@ -1,5 +1,5 @@
 public class ZooKeeper {
-    private int energyLevel = 100;;
+    private int energyLevel = 100;
 
     public ZooKeeper() {
 

@@ -7,5 +7,14 @@ public class Main {
         gor.throwSomething();
         gor.throwSomething();
         gor.climb();
+        Bat bat = new Bat();
+
+        bat.attackTown();
+        bat.attackTown();
+        bat.attackTown();
+        bat.eatHumans();
+        bat.eatHumans();
+        bat.fly();
+        bat.fly();
     }
 }
