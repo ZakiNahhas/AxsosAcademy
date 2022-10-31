@@ -23,8 +23,12 @@ public class ControllerspracticeApplication {
     public String index(@RequestParam(value="q", required = false) String searchQuery) {
         return "You searched for: " + searchQuery;
     }
+    @RequestMapping("/daikichi")
+    public String daikichi() {
+        return "Welcome!";
+    }
     @RequestMapping("/world")
     public String world() {
-        return "Class level annotations are cool too!";
+        return "Welcome!";
     }
 }
