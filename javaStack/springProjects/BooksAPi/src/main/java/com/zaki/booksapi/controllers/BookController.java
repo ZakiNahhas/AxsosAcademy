@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Controller
 public class BookController {
@@ -21,4 +22,12 @@ public class BookController {
         model.addAttribute("book", book);
         return "show.jsp";
     }
+    @RequestMapping("/books")
+    public String allBooks(Model model) {
+        ArrayList<Book> books = (ArrayList<Book>) bookService.allBooks();
+        model.addAttribute("books", books);
+
+        return "allBooks.jsp";
+    }
+
 }
