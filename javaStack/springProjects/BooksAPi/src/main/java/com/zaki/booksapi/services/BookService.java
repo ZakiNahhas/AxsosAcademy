@@ -34,13 +34,25 @@ private final BookRepository bookRepository;
         }
     }
 
-    public Book updateBook(Book book) {
-        return bookRepository.save(book);
+    public Book updateBook(Long id, String title, String desc, String lang, Integer numberOfPages) {
+        Book book = findBook(id);
+        if(book.getId()==id) {
+            book.setTitle(title);
+            book.setDescription(desc);
+            book.setLanguage(lang);
+            book.setNumberOfPages(numberOfPages);
+            return createBook(book);
+        } else {
+            return null;
+        }
     }
 
     public void deleteBook(Long id) {
-        allBooks().removeIf(t -> t.getId().equals(id));
+        Optional<Book> op = bookRepository.findById(id);
+        if(op.isPresent()) {
+        bookRepository.deleteById(id);
     }
+}
 }
 
 

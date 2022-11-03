@@ -38,18 +38,13 @@ public class BooksApi {
         return "/books/edit.jsp";
     }
 
-    @PutMapping("/books/{id}")
-    public String update(@Valid @ModelAttribute("book") Book book, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/books/edit.jsp";
-        } else {
-            bookService.updateBook(book);
-            return "redirect:/books";
-        }
+    @RequestMapping(value="/api/books/{id}", method=RequestMethod.PUT)
+    public Book update(@PathVariable("id") Long id, @RequestParam(value="title") String title, @RequestParam(value="description") String desc, @RequestParam(value="language") String lang, @RequestParam(value="pages") Integer numOfPages) {
+        Book book = bookService.updateBook(id, title, desc, lang, numOfPages);
+        return book;
     }
     @DeleteMapping("/books/{id}")
-    public String destroy(@PathVariable("id") Long id) {
+    public void destroy(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
-        return "redirect:/books";
     }
 }
