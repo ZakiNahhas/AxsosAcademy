@@ -4,9 +4,7 @@ import com.zaki.savetravels.services.SaveTravelsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -41,5 +39,23 @@ public class SaveTravelsController {
         model.addAttribute("saveTravels1", saveTravels1);
 
         return "show.jsp";
+    }
+    @DeleteMapping("/expenses1/{id}")
+    public String destroy(@PathVariable("id") Long id) {
+        saveTravelsService.deleteSaveTravels(id);
+        return "redirect:/expenses1";
+    }
+    @GetMapping("/showExpenses/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
+        SaveTravels saveTravels = saveTravelsService.findSaveTravels(id);
+        model.addAttribute("saveTravels", saveTravels);
+        return "edit.jsp";
+    }
+
+    @RequestMapping(value="/editExpenses/{id}", method = RequestMethod.PUT)
+    public String  update(@PathVariable("id") Long id, @RequestParam(value="expense") String expense, @RequestParam(value="description") String desc,
+                    @RequestParam(value="vendor") String vendor, @RequestParam(value="amount") Integer amount) {
+        SaveTravels saveTravels = saveTravelsService.updateSaveTravels(id, expense, desc, vendor, amount);
+        return "redirect:/expenses1";
     }
 }
