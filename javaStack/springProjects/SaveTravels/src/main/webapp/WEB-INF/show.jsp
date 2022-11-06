@@ -36,7 +36,7 @@
             </td>
             <td class="bg-danger">
 
-                <p><c:out value="${saveTravel.expense}"></c:out></p>
+                <p><a href="/expenses/${saveTravel.id}">  <c:out value="${saveTravel.expense}"></c:out></a></p>
             </td>
             <td class="bg-danger">
                 <p><c:out value="${saveTravel.vendor}"></c:out></p>

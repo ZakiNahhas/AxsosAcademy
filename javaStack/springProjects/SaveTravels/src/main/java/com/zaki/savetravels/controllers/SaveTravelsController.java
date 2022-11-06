@@ -58,4 +58,10 @@ public class SaveTravelsController {
         SaveTravels saveTravels = saveTravelsService.updateSaveTravels(id, expense, desc, vendor, amount);
         return "redirect:/expenses1";
     }
+    @RequestMapping("/expenses/{id}")
+    public String showOneExpense(@PathVariable("id") Long id, Model model) {
+        SaveTravels saveTravels2 =saveTravelsService.findSaveTravels(id);
+        model.addAttribute("saveTravels2", saveTravels2);
+        return "expensePage.jsp";
+    }
 }
