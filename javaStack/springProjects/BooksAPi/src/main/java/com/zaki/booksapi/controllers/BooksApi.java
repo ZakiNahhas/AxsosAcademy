@@ -2,6 +2,7 @@ package com.zaki.booksapi.controllers;
 
 import com.zaki.booksapi.models.Book;
 import com.zaki.booksapi.services.BookService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 public class BooksApi {
     private final BookService bookService;
     public BooksApi(BookService bookService){
@@ -35,7 +36,7 @@ public class BooksApi {
     public String edit(@PathVariable("id") Long id, Model model) {
         Book book = bookService.findBook(id);
         model.addAttribute("book", book);
-        return "/books/edit.jsp";
+        return "edit.jsp";
     }
 
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.PUT)
@@ -44,7 +45,8 @@ public class BooksApi {
         return book;
     }
     @DeleteMapping("/books/{id}")
-    public void destroy(@PathVariable("id") Long id) {
+    public String destroy(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
+        return "redirect:/books";
     }
 }

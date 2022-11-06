@@ -12,7 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 @NotNull
-    @Size(min = 5, max = 200)
+    @Size(min = 5, max = 200, message = "Title should be more than 5 and less than 200 baby")
     private String title;
     @NotNull
     @Size(min = 5, max = 200)

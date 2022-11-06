@@ -45,6 +45,11 @@
         </td>
         <td class="bg-danger">
             <p><c:out value="${book.numberOfPages}"></c:out></p>
+
+            <form action="/books/${book.id}" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input class="bg-secondary" type="submit" value="Delete">
+            </form>
         </td>
     </tr>
 </c:forEach>

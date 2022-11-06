@@ -33,7 +33,9 @@ private final BookRepository bookRepository;
             return null;
         }
     }
-
+public Book updateBook(Book b){
+        return bookRepository.save(b);
+}
     public Book updateBook(Long id, String title, String desc, String lang, Integer numberOfPages) {
         Book book = findBook(id);
         if(book.getId()==id) {
