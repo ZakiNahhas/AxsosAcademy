@@ -19,7 +19,7 @@
 <p>Vendor: ${saveTravels2.vendor}</p>
 <p>Amount Spent: ${saveTravels2.amount}</p>
 
-<a href="/expenses1">Go back</a>
+<a href="/expenses">Go back</a>
 
 </body>
 </html>

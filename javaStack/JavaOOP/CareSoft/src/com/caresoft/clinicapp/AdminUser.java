@@ -6,6 +6,7 @@ public class AdminUser extends User implements HIPAACompliantUser, HIPAAComplian
     private Integer employeeID;
     private String role;
     private ArrayList<String> securityIncidents = new ArrayList<String>();
+
     public AdminUser(Integer id, String role) {
         super(id);
         this.employeeID=id;
@@ -45,7 +46,7 @@ public class AdminUser extends User implements HIPAACompliantUser, HIPAAComplian
     @Override
     public boolean assignPin(int pin) {
         if (pin > 99999) {
-            authIncident();
+//            authIncident();
             return true;
         }
         return false;
@@ -75,4 +76,5 @@ public class AdminUser extends User implements HIPAACompliantUser, HIPAAComplian
         );
         this.securityIncidents.add(report);
     }
+
 }

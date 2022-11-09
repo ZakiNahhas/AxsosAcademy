@@ -44,7 +44,7 @@
             <td class="bg-danger">
                 <p><c:out value="${saveTravel.amount}"></c:out></p>
 
-                <form action="/expenses1/${saveTravel.id}" method="post">
+                <form action="/expenses/${saveTravel.id}" method="post">
                     <input type="hidden" name="_method" value="delete">
                     <input class="bg-secondary" type="submit" value="Delete">
                 </form>

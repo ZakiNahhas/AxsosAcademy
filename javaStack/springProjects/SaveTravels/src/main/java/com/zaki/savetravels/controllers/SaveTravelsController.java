@@ -19,11 +19,6 @@ public class SaveTravelsController {
         this.saveTravelsService = saveTravelsService;
     }
 
-    @RequestMapping("/expenses")
-    public String showExpenses(@ModelAttribute("saveTravels") SaveTravels saveTravels) {
-        return "show.jsp";
-    }
-
     @RequestMapping(value = "/expenses", method = RequestMethod.POST)
     public String handleForm(@Valid @ModelAttribute("saveTravels") SaveTravels saveTravels, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -32,11 +27,11 @@ public class SaveTravelsController {
             return "show.jsp";
         } else {
             saveTravelsService.createSaveTravels(saveTravels);
-            return "redirect:/expenses1";
+            return "redirect:/expenses";
         }
     }
 
-    @RequestMapping("/expenses1")
+    @RequestMapping("/expenses")
     public String allExpenses(@ModelAttribute("saveTravels") SaveTravels saveTravels, Model model) {
         List<SaveTravels> saveTravels1 = saveTravelsService.allSaveTravels();
         model.addAttribute("saveTravels1", saveTravels1);
@@ -44,10 +39,10 @@ public class SaveTravelsController {
         return "show.jsp";
     }
 
-    @DeleteMapping("/expenses1/{id}")
+    @DeleteMapping("/expenses/{id}")
     public String destroy(@PathVariable("id") Long id) {
         saveTravelsService.deleteSaveTravels(id);
-        return "redirect:/expenses1";
+        return "redirect:/expenses";
     }
 
     @GetMapping("/showExpenses/{id}")
@@ -58,10 +53,10 @@ public class SaveTravelsController {
     }
 
     @RequestMapping(value = "/editExpenses/{id}", method = RequestMethod.PUT)
-    public String update(@PathVariable("id") Long id, @RequestParam(value = "expense") String expense, @RequestParam(value = "description") String desc,
+    public String update(@Valid @PathVariable("id") Long id, @RequestParam(value = "expense") String expense, @RequestParam(value = "description") String desc,
                          @RequestParam(value = "vendor") String vendor, @RequestParam(value = "amount") Integer amount) {
         SaveTravels saveTravels = saveTravelsService.updateSaveTravels(id, expense, desc, vendor, amount);
-        return "redirect:/expenses1";
+        return "redirect:/expenses";
     }
 
     @RequestMapping("/expenses/{id}")

@@ -22,6 +22,7 @@ public class Physician extends User implements HIPAACompliantUser {
     public boolean assignPin(int pin) {
         // TODO Auto-generated method stub
         if (pin > 999 && pin < 9999) {
+            this.pin = pin;
             return true;
         }
         return false;
