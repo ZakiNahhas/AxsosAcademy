@@ -2,6 +2,7 @@ package com.zaki.loginandregistration.models;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -33,14 +34,15 @@ public class User {
     @NotEmpty(message = "Confirm Password is required!")
     @Size(min = 8, max = 128, message = "Passwords must match")
     private String confirm;
-    @Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
+    @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date   createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date   updatedAt;
 
     public User() {
     }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();

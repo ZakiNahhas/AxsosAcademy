@@ -24,6 +24,7 @@ public class UserController {
     public String index(Model model) {
         model.addAttribute("newUser", new User());
         model.addAttribute("newLogin", new LoginUser());
+
         return "index.jsp";
     }
 
@@ -52,7 +53,7 @@ public class UserController {
     @GetMapping("/home")
     public String home(Model model, HttpSession session) {
         if (session.getAttribute("user_id") != null) {
-            Long user_id = (Long) session.getAttribute("user_id");
+            Long user_id = (Long)session.getAttribute("user_id");
             User thisUser = userService.findUserById(user_id);
             model.addAttribute("thisUser", thisUser);
             return "home.jsp";
@@ -60,6 +61,7 @@ public class UserController {
             return "redirect:/";
         }
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
