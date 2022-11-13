@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> findAll();
+    List<Book> findByBorrowerIdIs(Long userId);
+    List<Book> findByBorrowerIdIsOrUserIdIs(Long borrowerID, Long userId);
 
 //    List<Book> findByDescriptionContaining(String search);
 //

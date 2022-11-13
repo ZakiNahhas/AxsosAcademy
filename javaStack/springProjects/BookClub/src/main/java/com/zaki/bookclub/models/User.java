@@ -1,6 +1,8 @@
 package com.zaki.bookclub.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name = "users")
@@ -39,9 +43,14 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date   createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date        updatedAt;
+    private Date   updatedAt;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Book> books;
+
+    @Column(updatable = false)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Book> borrowedBooks;
 
     public User() {
     }

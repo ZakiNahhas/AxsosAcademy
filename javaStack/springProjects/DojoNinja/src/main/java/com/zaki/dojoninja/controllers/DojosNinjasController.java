@@ -53,7 +53,7 @@ public class DojosNinjasController {
 
     @GetMapping("/dojos/{id}")
     public String showDojo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("dojo", this.dojosNinjasService.findDojo(id));
+        model.addAttribute("dojo", this.dojosNinjasService.getDojoWhereId(id));
         return "showDojo.jsp";
     }
 }

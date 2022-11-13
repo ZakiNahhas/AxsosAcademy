@@ -13,8 +13,9 @@
 
 
 </head>
-<body>
+<body style="margin: 0 auto; width: 80%">
 <p style="margin-left: 10px; margin-top: 10px; font-size: 25px">Welcome ${thisUser.userName}</p>
+<p><a href="/bookmarket">Go to the Book Market</a></p>
 <p style="margin-left: 10px; margin-top: 10px; font-size: 25px">Books from everyone's shelves: </p>
 <p style="text-align: right; margin-right: 10px; font-size: 25px"><a href="/logout">logout</a></p>
 <p style="text-align: right; margin-right: 10px; font-size: 25px"><a href="/books/new">Add a book to my shelf!</a></p>
@@ -33,28 +34,38 @@
         <td>
             Posted By
         </td>
+        <td>
+            Actions
+        </td>
     </tr>
     </thead>
 <c:forEach var="book" items="${books}">
-    <tr class="bg-danger">
-        <td class="bg-danger">
+    <tr class="bg-secondary">
+        <td class="bg-secondary">
             <p><c:out value="${book.id}"></c:out></p>
         </td>
-        <td class="bg-danger">
+        <td class="bg-secondary">
 
-            <p><a href="/books/${book.id}">  <c:out value="${book.title}"></c:out></a></p>
+            <p><a style="color: black" href="/books/${book.id}">  <c:out value="${book.title}"></c:out></a></p>
         </td>
-        <td class="bg-danger">
-            <p><c:out value="${book.authorName}"></c:out></p>
+        <td class="bg-secondary">
+            <p><c:out value="${book.author}"></c:out></p>
         </td>
-        <td class="bg-danger">
-            <p><c:out value="${book.postedBy}"></c:out></p>
-
-            <form action="/books/${book.id}" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input class="bg-secondary" type="submit" value="Delete">
-            </form>
+        <td class="bg-secondary">
+            <p><c:out value="${book.user.userName}"></c:out></p>
         </td>
+       <td>
+           <c:if test="${user_id == book.user.id}">
+               <div style="display: flex;">
+                   <form action="/books/${book.id}" method="post">
+                       <input type="hidden" name="_method" value="delete">
+                       <input class="btn btn-danger" type="submit" value="Delete">
+                   </form>
+                   <div style="margin-left: 20px; color: wheat;"><a class="btn btn-success" href="/books/${book.id}/edit">Edit</a>
+                   </div>
+               </div>
+           </c:if>
+       </td>
     </tr>
 </c:forEach>
 </table>

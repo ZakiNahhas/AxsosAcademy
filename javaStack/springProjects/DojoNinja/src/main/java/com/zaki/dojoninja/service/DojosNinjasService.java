@@ -34,6 +34,9 @@ public class DojosNinjasService {
     public Dojo findDojo(Long id) {
         return this.dojosRepository.findById(id).orElse(null);
     }
+    public Dojo getDojoWhereId(Long id) {
+        return this.dojosRepository.getDojoWhereId(id);
+    }
     public Ninja findNinja(Long id) {
         return this.ninjasRepository.findById(id).orElse(null);
     }

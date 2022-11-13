@@ -14,8 +14,8 @@
 
 
 </head>
-<body>
-<p><a href="/books">Back to Shelves</a></p>
+<body style="font-family: monospace; margin: 0 auto; width: 80%">
+<p><a href="/bookmarket">Back to Shelves</a></p>
 <h1>Add a book to your shelf!</h1>
 <%--@elvariable id="book" type=""--%>
 <form:form action="/books/create" method="post" modelAttribute="book">
@@ -34,7 +34,7 @@
         <form:errors path="myThoughts"/>
         <form:textarea cols="40" rows="5" path="myThoughts"/>
     </p>
-    <input type="submit" value="Submit"/>
+    <input class="btn btn-success" type="submit" value="Submit"/>
 </form:form>
 </body>
 </html>

@@ -33,6 +33,10 @@ public class Book {
     @JoinColumn(name = "user_id")
     private User   user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="borrower_id")
+    private User borrower;
+
     public Book() {
     }
 

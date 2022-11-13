@@ -72,6 +72,7 @@ public class Dojo {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
+
 }
 
 

@@ -1,0 +1,144 @@
+repositories/DojoRepository.java
+
+// ...
+public interface DojoRepository extends CrudRepository<Dojo, Long>{
+    List<Dojo> findAll();
+    
+    // get all dojos
+    @Query("SELECT d FROM Dojo d")
+    List<Dojo> findAllDojos();
+    
+    // get all the names of the dojos
+    @Query("SELECT d.name FROM Dojo d")
+    List<String> findAllDojosNames();
+    
+    // passing params and filtering (still retrieves a list)
+    @Query("SELECT d FROM Dojo d WHERE id = ?1")
+    List<Dojo> getDojoWhereId(Long id);
+    
+    // passing params and filtering
+    @Query("SELECT d FROM Dojo d WHERE id = ?1")
+    Dojo getSingleDojoWhereId(Long id);
+}
+
+
+
++________________________________________+
+
+
+Modifying Queries
+If we want to update or delete, we must use a @Modifying Annotation to indicate that we are changing the values in our database.
+
+repositories/DojoRepository.java
+
+// ...
+public interface DojoRepository extends CrudRepository<Dojo, Long>{
+    //...
+    // previous methods removed for brevity
+    //...
+    
+    // Note the int type. It is because it returns the number of rows affected
+    @Modifying
+    @Query("update Dojo d set d.name = ?1 WHERE d.id = ?2")
+    int setNameForOne(String name, Long id);
+    
+    @Modifying
+    @Query("update Dojo d set d.name = ?1")
+    int setNameForAll(String name);
+    
+    @Modifying
+    @Query("delete Dojo d WHERE d.id = ?1")
+    int deleteOneDojo(Long id);
+}
+
+
+
++_____________________________________+
+
+Native Queries
+JPA also supports native queries. This way, you can write any query in raw SQL.
+
+// ...
+public interface DojoRepository extends CrudRepository<Dojo, Long>{
+    //...
+    // previous methods removed for brevity
+    //...
+    
+    // Select all, we get a list of Dojo objects back.
+    @Query(value="SELECT * FROM dojos", nativeQuery=true)
+    List<Dojo> findAllDojosWithNativeQuery();
+    
+    // get all the names of the dojos with id. If we want to select specific columns, we will get a list of Object arrays because they are no longer Dojo objects. Each index of the array will be the column selected respectively. Therefore 0 = id column, 1 = name column
+    @Query(value="SELECT id, name FROM dojos", nativeQuery=true)
+    List<Object[]> findAllDojosNamesWithId();
+    
+    // get one dojo
+    @Query(value="SELECT * FROM dojos WHERE id = ?1", nativeQuery=true)
+    Dojo getDojoWhereId(Long id);
+}
+
+
+
++____________________________________+
+
+
+To unpack the data from the findAllDojoNamesWithId2 method, you would have to run something similar to this in your service:
+
+
+// ...
+List<Object[]> dojos = dojoRepo.findAllDojosNamesWithId2();
+Object[] dojo = dojos.get(0);
+Object dojoId = dojo[0];
+Object dojoName = dojo[1];
+
+
+Joins
+
+public interface DojoRepository extends CrudRepository<Dojo, Long>{
+    List<Dojo> findAll()
+    
+    //...
+    // previous methods removed for brevity
+    //...
+    
+    // inner join retrieving only the dojos
+    @Query("SELECT d FROM Dojo d JOIN d.ninjas n")
+    List<Dojo> joinDojosAndNinjas();
+    
+    // inner join retrieving dojos and ninjas
+    @Query("SELECT d, n FROM Dojo d JOIN d.ninjas n")
+    List<Object[]> joinDojosAndNinjas2();
+}
+
+
+How to use it:
+
+List<Object[]> table = dojoRepo.joinDojosAndNinjas2();
+for(Object[] row : table) {
+    Dojo dojo = (Dojo) row[0];
+    Ninja ninja = (Ninja) row[1];
+    System.out.println(dojo.getName());
+    System.out.println(ninja.getFirstName());
+}
+
+
+The table for it: 
+
+<table class="table">
+    <thead>
+        <th>Dojo Name</th>
+        <th>Ninja First Name</th>
+        <th>Ninja Last Name</th>
+    </thead>
+    <tbody>
+        <c:forEach var="row" items="${table}">                
+        <tr>
+            <td>${row[0].name}</td>
+            <td>${row[1].firstName}</td>
+            <td>${row[1].lastName}</td>
+        </tr>
+        </c:forEach>
+    </tbody>
+</table>
+
+
