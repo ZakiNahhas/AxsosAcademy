@@ -42,11 +42,11 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "teams_users",
+        name = "joins",
         joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "team_id")
+        inverseJoinColumns = @JoinColumn(name = "trip_id")
     )
-    private List<Trip> jointeams;
+    private List<Trip> joinTrips;
 
     public User() {
 
@@ -108,10 +108,6 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public List<Trip> getTeams() {
-        return trips;
-    }
-
     public void setTeams(List<Trip> trips) {
         this.trips = trips;
     }
@@ -124,12 +120,12 @@ public class User {
         this.trips = trips;
     }
 
-    public List<Trip> getJointeams() {
-        return jointeams;
+    public List<Trip> getJoinTrips() {
+        return joinTrips;
     }
 
-    public void setJointeams(List<Trip> jointeams) {
-        this.jointeams = jointeams;
+    public void setJoinTrips(List<Trip> joinTrips) {
+        this.joinTrips = joinTrips;
     }
 
     @PrePersist

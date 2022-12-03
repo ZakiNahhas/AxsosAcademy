@@ -21,7 +21,6 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    //find one User
     public User oneUser(Long id) {
         Optional<User> optUser = userRepo.findById(id);
         if (optUser.isPresent()) {
@@ -31,7 +30,6 @@ public class UserService {
         }
     }
 
-    // method to register
     public User register(User newUser, BindingResult result) {
 
         if (userRepo.findByEmail(newUser.getEmail()).isPresent()) {
@@ -50,20 +48,19 @@ public class UserService {
         }
     }
 
-    // method for login
     public User login(LoginUser newLogin, BindingResult result) {
         if (result.hasErrors()) {
             return null;
         }
 
-        Optional<User> potentiallUser = userRepo.findByEmail(newLogin.getEmail());
-        if (!potentiallUser.isPresent()) {
+        Optional<User> potentialUser = userRepo.findByEmail(newLogin.getEmail());
+        if (!potentialUser.isPresent()) {
             System.out.println("not present");
             result.rejectValue("email", "notFound", "Email not found");
             return null;
         }
 
-        User user = potentiallUser.get();
+        User user = potentialUser.get();
         if (!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
             result.rejectValue("password", "Matches", "Is this really your account?");
         }
@@ -74,21 +71,21 @@ public class UserService {
             return user;
         }
     }
+
     public User findUser(Long id) {
         Optional<User> user = userRepo.findById(id);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             return user.get();
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-//        public List<User> getAssignedteams(Trip trip) {
-//        return userRepo.findAllByJointeams(trip);
+//    public List<User> getAssignedTrips(Trip trip) {
+//        return userRepo.findAllByJoinTrips(trip);
 //    }
 //
-//    public List<User> getUnassignedteams(Trip trip) {
-//        return userRepo.findByJointeamsNotContains(trip);
+//    public List<User> getUnassignedTrips(Trip trip) {
+//        return userRepo.findByJoinTripsNotContains(trip);
 //    }
 }

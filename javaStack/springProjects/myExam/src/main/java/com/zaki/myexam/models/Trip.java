@@ -19,14 +19,14 @@ public class Trip {
 
     @NotEmpty(message = "A title for the trip is required!")
     @Size(min = 3, max = 30, message = "Title must be at least 2 chars")
-    private String name;
+    private String title;
 
     @Min(value = 1, message = "must be equal to or greater than 1")
-    private Integer level;
+    private Integer capacity;
 
     @NotNull
     @Size(min = 2, max = 155, message = "details must be between 2 and 155 chars")
-    private String day;
+    private String details;
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -41,16 +41,17 @@ public class Trip {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "trips_users",
+        name = "joins",
         joinColumns = @JoinColumn(name = "trip_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-
     private List<User> players;
 
-    public Trip() {
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "join_id")
+    private List<Join> joins;
 
-    }
+    public Trip() {}
 
     public Long getId() {
         return id;
@@ -60,28 +61,28 @@ public class Trip {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Integer getLevel() {
-        return level;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public String getDay() {
-        return day;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public Date getCreatedAt() {
@@ -116,6 +117,14 @@ public class Trip {
         this.players = players;
     }
 
+    public List<Join> getJoins() {
+        return joins;
+    }
+
+    public void setJoins(List<Join> joins) {
+        this.joins = joins;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
@@ -125,4 +134,5 @@ public class Trip {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
+
 }

@@ -17,55 +17,52 @@
             crossorigin="anonymous"></script>
 </head>
 
-<body style="font-family: monospace; width: 80%; margin: 0 auto">
+<body style="font-family: monospace; width: 80%; margin: 0 auto; background-color: #b1bac4; color: black">
 
 <div>
     <nav>
-        <a href="/dashboard">Dashboard</a> |
-
+        |   <a href="/dashboard">Dashboard</a> |
     </nav>
-    <h5 style="font-family: monospace">Edit your Trip</h5>
-    <h3></h3>
+    <br>
+    <h5 style="font-family: monospace">Edit your Trip:</h5>
+    <br>
     <div>
-        <%--@elvariable id="team" type="team"--%>
-        <form:form method="post" action="/edit/trip/${team.id}" modelAttribute="team">
+     
+        <%--@elvariable id="trip" type="trip"--%>
+        <form:form method="post" action="/edit/trip/${trip.id}" modelAttribute="trip">
             <div>
 			<span>
-				<form:label path="name">Trip Title</form:label>
+				<form:label path="title">Trip Title</form:label>
 			</span>
-                <form:input path="name" type="text" class="giveteam" value="${currentTeam.name }"/>
-                <form:errors path="name" class="error"/>
-
+                <form:input path="title" type="text" value="${currentTrip.title }"/>
+                <form:errors path="title" cssStyle="color: red"/>
             </div>
             <br>
             <div>
 			<span>
-				<form:label path="level">Capacity</form:label>
+				<form:label path="capacity">Capacity</form:label>
 			</span>
-                <form:input path="level" type="number" value="${currentTeam.level }"/>
-                <form:errors path="level" class="error"/>
-                <p>${error }</p>
-
+                <form:input path="capacity" type="number" value="${currentTrip.capacity }"/>
+                <form:errors path="capacity" cssStyle="color: red"/>
             </div>
 
             <br>
             <div>
 			<span>
-				<form:label path="day">Details</form:label>
+				<form:label path="details">Details</form:label>
 			</span>
-                <form:input path="day" type="text" value="${currentTeam.day }"/>
-                <form:errors path="day" class="error"/>
+                <form:input path="details" type="text" value="${currentTrip.details }"/>
+                <form:errors path="details" cssStyle="color: red"/>
             </div>
-
 
             <input type="hidden" name="user" value="${userName.id }"/>
             <form:input type="hidden" path="players"/>
             <br>
             <input type="submit" value="Edit Trip" class="btn btn-success"/>
         </form:form>
-            <br>
+        <br>
     </div>
-    <a href="/delete/trip/${team.id }" class="btn btn-danger"> Delete Team</a>
+    <a href="/delete/trip/${trip.id }" class="btn btn-danger"> Delete Trip</a>
 </div>
 </body>
 </html>

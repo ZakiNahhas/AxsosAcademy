@@ -1,8 +1,10 @@
 package com.zaki.myexam.controllers;
 
+import com.zaki.myexam.models.Join;
 import com.zaki.myexam.models.LoginUser;
 import com.zaki.myexam.models.Trip;
 import com.zaki.myexam.models.User;
+import com.zaki.myexam.services.JoinService;
 import com.zaki.myexam.services.TripService;
 import com.zaki.myexam.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,17 +30,19 @@ public class MainController {
     @Autowired
     private final UserService userService;
     private final TripService tripService;
+    private final JoinService joinService;
 
-    public MainController(UserService userService, TripService tripService) {
+    public MainController(UserService userService, TripService tripService, JoinService joinService) {
         super();
         this.userService = userService;
         this.tripService = tripService;
+        this.joinService = joinService;
     }
 
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         if (session.getAttribute("user_id") != null) {
-            return "dashboard.jsp";
+            return "redirect:/dashboard";
         }
         model.addAttribute("newUser", new User());
         model.addAttribute("newLogin", new LoginUser());
@@ -45,12 +51,12 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model, HttpSession session) {
+    public String dashboard(@ModelAttribute("join") Join join, Model model, HttpSession session) {
         if (session.getAttribute("user_id") != null) {
             Long loggedID = (Long)session.getAttribute("user_id");
             User user = userService.oneUser(loggedID);
-            List<Trip> trips = tripService.allTeams();
-            model.addAttribute("teams", trips);
+            List<Trip> trips = tripService.allTrips();
+            model.addAttribute("trips", trips);
             model.addAttribute("logged", user);
             return "dashboard.jsp";
         } else {
@@ -73,8 +79,7 @@ public class MainController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin,
-                        BindingResult result, Model model, HttpSession session) {
+    public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, Model model, HttpSession session) {
 
         User user = userService.login(newLogin, result);
         if (result.hasErrors()) {
@@ -93,26 +98,54 @@ public class MainController {
     }
 
     @GetMapping("/add/trip")
-    public String addTeam(Model model, @ModelAttribute("team") Trip trip, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String addTrip(Model model, @ModelAttribute("trip") Trip trip, HttpSession session, RedirectAttributes redirectAttributes) {
 
         Long loggedID = (Long)session.getAttribute("user_id");
         User userName = userService.oneUser(loggedID);
         model.addAttribute("userName", userName);
-        return "addTeam.jsp";
+        return "addTrip.jsp";
     }
 
     @PostMapping("/add/trip")
-    public String createEvent(@Valid @ModelAttribute("team") Trip trip, BindingResult result, Model model, HttpSession session) {
-//        tripService.tripDay(trip, result);
+    public String createEvent(@Valid @ModelAttribute("trip") Trip trip, BindingResult result, Model model, HttpSession session) {
+        //        tripService.tripDay(trip, result);
         User user = userService.findUser((Long)session.getAttribute("user_id"));
         if (result.hasErrors()) {
-            return "addTeam.jsp";
+            return "addTrip.jsp";
         } else {
-
-            tripService.createTeam(trip);
-
+            Long loggedID = (Long)session.getAttribute("user_id");
+            User userName = userService.oneUser(loggedID);
+            trip.getPlayers().add(userName);
+            tripService.createTrip(trip);
             return "redirect:/dashboard";
         }
+    }
+
+    @GetMapping("/edit/trip/{id}")
+    public String editPage(Model model, HttpSession session, @PathVariable("id") Long id, @ModelAttribute("trip") Trip trip) {
+        Long loggedID = (Long)session.getAttribute("user_id");
+        User userName = userService.oneUser(loggedID);
+        Trip currentTrip = tripService.singleTrip(id);
+        model.addAttribute("userName", userName);
+        model.addAttribute("currentTrip", currentTrip);
+        return "editTrip.jsp";
+    }
+
+    @PostMapping("/edit/trip/{id}")
+    public String updateTrip(@Valid @ModelAttribute("trip") Trip trip, BindingResult result, Model model, HttpSession session) {
+        User user = userService.findUser((Long)session.getAttribute("user_id"));
+        if (result.hasErrors()) {
+            return "editTrip.jsp";
+        } else {
+            tripService.updateTrip(trip);
+            return "redirect:/dashboard";
+        }
+    }
+
+    @RequestMapping("/delete/trip/{id}")
+    public String destroy(@PathVariable("id") Long id) {
+        tripService.deleteTrip(id);
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/trip/{id}")
@@ -120,75 +153,84 @@ public class MainController {
 
         Long loggedID = (Long)session.getAttribute("user_id");
         User user = userService.oneUser(loggedID);
-        Trip trip = tripService.singleTeam(id);
-//        model.addAttribute("assignedUsers", userService.getAssignedteams(trip));
-//        model.addAttribute("unassignedUsers", userService.getUnassignedteams(trip));
-        model.addAttribute("userName", user);
-        model.addAttribute("team", trip);
-        return "showTeam.jsp";
+        Trip trip = tripService.singleTrip(id);
+        List<Date> joinDate = joinService.joinDate(trip.getId());
+        //        System.out.println(joinDate);
+        //        model.addAttribute("assignedUsers", userService.getAssignedTrips(trip));
+        //        model.addAttribute("userName", user);
+        System.out.println(trip.getId());
+        System.out.println(trip.getUser());
+        model.addAttribute("trip", trip);
+        model.addAttribute("joinDate", joinDate);
+        //        System.out.println(trip.getJoins());
+        return "showTrip.jsp";
     }
 
     @PostMapping("/trip/{id}")
     public String editCategory(@PathVariable("id") Long id, @RequestParam(value = "userId") Long userId, Model model) {
 
         User player = userService.oneUser(userId);
-        Trip trip = tripService.singleTeam(id);
+        Trip trip = tripService.singleTrip(id);
         trip.getPlayers().add(player);
-        tripService.createTeam(trip);
-//        model.addAttribute("assignedUsers", userService.getAssignedteams(trip));
-//        model.addAttribute("unassignedCategories", userService.getUnassignedteams(trip));
+        tripService.createTrip(trip);
+        //                model.addAttribute("assignedUsers", userService.getAssignedTrips(trip));
+        //                model.addAttribute("unassignedCategories", userService.getUnassignedTrips(trip));
 
         return "redirect:/trip/" + id;
     }
 
-    @GetMapping("/edit/trip/{id}")
-    public String editName(Model model, HttpSession session, @PathVariable("id") Long id, @ModelAttribute("team") Trip trip) {
-        Long loggedID = (Long)session.getAttribute("user_id");
-        User userName = userService.oneUser(loggedID);
-        Trip currentTrip = tripService.singleTeam(id);
-        model.addAttribute("userName", userName);
-        model.addAttribute("currentTeam", currentTrip);
-        return "editTeam.jsp";
-    }
+    //    @GetMapping("trips/{id}/join")
+    //    public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
+    //        if (session.getAttribute("user_id") != null) {
+    //            Long userId = (Long)session.getAttribute("user_id");
+    //            User userToAdd = userService.findUser(userId);
+    //            Trip thisTrip = tripService.singleTeam(id);
+    //            User player = userService.oneUser(userId);
+    //            Trip trip = tripService.singleTeam(id);
+    //            trip.getPlayers().add(player);
+    //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+    //            Date date = new Date();
+    //            System.out.println(date);
+    //            Join join = joinService.singleJoin();
+    //            join.setCreatedAt(date);
+    //
+    //            System.out.println(join.getCreatedAt());
+    //
+    //            //            tripService.updateTeam(trip);
+    //            joinService.createJoin(join);
+    //            return "redirect:/dashboard";
+    //        }
+    //        return "redirect:/";
+    //    }
 
-    @RequestMapping("/delete/trip/{id}")
-    public String destroy(@PathVariable("id") Long id) {
-        tripService.deleteTeam(id);
+    @PostMapping("/trips/join")
+    public String joinMe(Model model, HttpSession session, @Valid @ModelAttribute("join") Join join, BindingResult result) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        System.out.println(formatter.format(date));
+        join.setCreatedAt(date);
+        joinService.joinThisTrip(join);
         return "redirect:/dashboard";
     }
 
-    @PostMapping("/edit/trip/{id}")
-    public String updateNameForm(Model model,
-                                 @PathVariable("id") Long id,
-                                 @Valid @ModelAttribute("team") Trip trip,
-                                 BindingResult result,
-                                 HttpSession session) {
-//        tripService.tripDay(trip, result);
-        Long loggedID = (Long)session.getAttribute("user_id");
-        User userName = userService.oneUser(loggedID);
-        Trip currentTrip = tripService.singleTeam(id);
-
-        if (result.hasErrors()) {
-            model.addAttribute("userName", userName);
-            model.addAttribute("currentTeam", currentTrip);
-
-            return "editTeam.jsp";
-        } else {
-
-            return "redirect:/dashboard";
-        }
-    }
-    @GetMapping("trips/{id}/join")
-    public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
-        if (session.getAttribute("user_id") != null) {
-            Long userId = (Long)session.getAttribute("user_id");
-            User userToAdd = userService.findUser(userId);
-            Trip thisTrip = tripService.singleTeam(id);
-            User player = userService.oneUser(userId);
-            Trip trip = tripService.singleTeam(id);
-            trip.getPlayers().add(player);
-            return "redirect:/dashboard";
-        }
-        return "redirect:/";
+    //    @GetMapping("trips/{id}/remove")
+    //    public String leaveProject(@PathVariable("id") Long id, Model model, HttpSession session) {
+    //        if (session.getAttribute("user_id") != null) {
+    //            Long userId = (Long)session.getAttribute("user_id");
+    //            User userToRemove = userService.findUser(userId);
+    //            Long loggedID = (Long)session.getAttribute("user_id");
+    //            User user = userService.oneUser(loggedID);
+    //            Trip thisTrip = tripService.singleTeam(id);
+    //            model.addAttribute("logged", loggedID);
+    //            thisTrip.getPlayers().remove(userToRemove);
+    //            tripService.updateTeam(thisTrip);
+    //            return "redirect:/trip/" +id;
+    //        }
+    //        return "redirect:/";
+    //    }
+    @PostMapping("remove/{id}")
+    public String removeJoin(@Valid @ModelAttribute("join") Join join, @PathVariable("id") Long id, Model model, HttpSession session) {
+        joinService.joinThisTrip(join);
+        return "redirect:/trip/" + id;
     }
 }

@@ -16,7 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
             crossorigin="anonymous"></script>
 </head>
-<body style="font-family: monospace; width: 80%; margin: 0 auto">
+<body style="font-family: monospace; width: 80%; margin: 0 auto; background-color: #b1bac4; color: black">
+<br>
 <div>
     <nav>
         <a href="/dashboard">Dashboard</a> |
@@ -27,38 +28,38 @@
     <h5 style="font-family: monospace">Add a Trip</h5>
     <br>
     <div class="flex">
-        <%--@elvariable id="team" type="team"--%>
-        <form:form method="post" action="/add/trip" modelAttribute="team">
+        <%--@elvariable id="trip" type="trip"--%>
+        <form:form method="post" action="/add/trip" modelAttribute="trip">
             <div>
 			<span>
-				<form:label path="name"> Trip title: </form:label>
+				<form:label path="title"> Trip title: </form:label>
 			</span>
-                <form:input path="name" type="text"/>
-                <form:errors path="name"/>
-                <p>${error }</p>
+                <form:input path="title" type="text"/>
+                <form:errors path="title" cssStyle="color: red"/>
             </div>
 
             <br>
             <div>
 			<span>
-				<form:label path="level">Capacity: </form:label>
+				<form:label path="capacity">Capacity: </form:label>
 			</span>
-                <form:input path="level" type="number"/>
-                <form:errors path="level"/>
-                                    <p>${error }</p>
+                <form:input path="capacity" type="number"/>
+                <br>
+                <form:errors path="capacity" cssStyle="color: red"/>
             </div>
             <div>
                 <br>
-			<span>
-				<form:label path="day">Details: </form:label>
+                <span>
+				<form:label path="details">Details: </form:label>
 			</span>
-                <form:input path="day" type="text"/>
-                <form:errors path="day"/>
+                <form:input path="details" type="text"/>
+                <br>
+                <form:errors path="details" cssStyle="color: red"/>
             </div>
 
             <br>
             <input type="hidden" name="user" value="${userName.id }"/>
-
+            <input type="hidden" name="players"/>
             <input type="submit" value="Add a Trip" class="btn btn-success"/>
         </form:form>
 

@@ -1,6 +1,5 @@
 package com.zaki.myexam.repositories;
 
-
 import com.zaki.myexam.models.Trip;
 import com.zaki.myexam.models.User;
 import org.springframework.data.repository.CrudRepository;
@@ -15,7 +14,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-//    List<User> findByJointeamsNotContains(Trip trip);
+//    List<User> findByJoinTripsNotContains(Trip trip);
 //
-//    List<User> findAllByJointeams(Trip trip);
+//    List<User> findAllByJoinTrips(Trip trip);
 }

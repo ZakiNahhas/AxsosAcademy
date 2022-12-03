@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TeamRepository extends CrudRepository<Trip, Long> {
+public interface TripRepository extends CrudRepository<Trip, Long> {
     List<Trip> findAll();
-
-    Optional<Trip> findByName(String team);
+    //    Optional<Trip> findByName(String trip);
+    Optional<Trip> findById(Long id);
 }
