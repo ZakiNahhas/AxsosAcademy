@@ -26,7 +26,7 @@ class Unit extends Card{
 class Effect extends Card{
     constructor(cardName, cost, text, stat, magnitude){
         super(cardName, cost);
-        this.text=text;w
+        this.text=text;
         this.stat=stat;
         this.magnitude=magnitude;
     }
@@ -46,13 +46,7 @@ class Effect extends Card{
         }
     }
 }
-// turn	action
-// 1	Make an instance of "Red Belt Ninja"
-// 1	Make an instance of "Hard Algorithm" and play it on "Red Belt Ninja"
-// 2	Make an instance "Black Belt Ninja"
-// 2	Make an instance of "Unhandled Promise Rejection" and play it on "Red Belt Ninja"
-// 3	Make an instance of "Pair Programming" and play it on "Red Belt Ninja"
-// 3	"Red Belt Ninja" uses the attack method on "Black Belt Ninja"
+
 
 const RedBeltNinja= new Unit("Red Belt Ninja",3,3,4);
 const BlackBeltNinja= new Unit("Black Belt Ninja",4,5,4);
