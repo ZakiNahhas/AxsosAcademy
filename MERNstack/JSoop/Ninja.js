@@ -4,7 +4,7 @@ class Ninja {
     this.health = 100;
     this.speed = 3;
     this.strength = 3;
-    console.log("this is new object");
+    console.log("this is a new object");
   }
   sayName() {
     console.log(this.name);
@@ -21,7 +21,7 @@ class Ninja {
 class Sensei extends Ninja {
   constructor(superNinja) {
     super(superNinja);
-    this.health = health;
+    this.health = 200;
     this.speed = 10;
     this.strength = 10;
     this.wisdom = 10;
