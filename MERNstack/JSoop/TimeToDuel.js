@@ -46,7 +46,9 @@ class Effect extends Card{
         }
     }
 }
-
+const fireListPkmn = pokémon
+  .filter((p) => p.types[0] === "fire" && p.types[1] === "fire")
+  .map((x) => x.name);
 
 const RedBeltNinja= new Unit("Red Belt Ninja",3,3,4);
 const BlackBeltNinja= new Unit("Black Belt Ninja",4,5,4);
