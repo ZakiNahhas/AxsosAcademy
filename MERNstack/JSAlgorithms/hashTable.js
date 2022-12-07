@@ -46,3 +46,4 @@ class HashTable {
   console.log(ht.remove("Spain"));
   console.log(ht.remove("italy"));
   console.log(ht.size);
+  console.log(ht);
