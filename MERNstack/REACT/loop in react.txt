@@ -1,0 +1,3 @@
+<ul>
+        {arr.map((item, idx)=><li key={idx}>{item}</li>)}
+        </ul>
