@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router-dom";
 import ProductForm from '../components/ProductForm';
+import DeleteButton from '../components/DeleteButton';
     
 const Update = (props) => {
     const { id } = useParams();
@@ -32,6 +33,7 @@ const Update = (props) => {
         initialDescription={product.description}
     />
 )}
+<DeleteButton productId={product._id} successCallback={() => navigate("/")} />
         </div>
     )
 }

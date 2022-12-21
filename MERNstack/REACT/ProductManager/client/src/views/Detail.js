@@ -5,7 +5,6 @@ import DeleteButton from '../components/DeleteButton';
     
 const Detail = (props) => {
     
-    // const history = useHistory();
     const [product, setProduct] = useState({})
     const { id } = useParams();
     const navigate = useNavigate();
@@ -16,11 +15,11 @@ const Detail = (props) => {
             .catch(err => console.error(err));
     }, []);
 
-    function handleDelete(id) {
-        axios.delete('http://localhost:8000/api/products/' + id)
-        .then(() => navigate("/")
-        )
-    }
+    // function handleDelete(id) {
+    //     axios.delete('http://localhost:8000/api/products/' + id)
+    //     .then(() => navigate("/")
+    //     )
+    // }
     
     return (
         <div style={{width:'20%', margin:'0 auto'}}>
