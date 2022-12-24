@@ -2,9 +2,10 @@ const Player = require("../models/player.model");
 
 
 module.exports.createPlayer = (request, response) => {
-  const { name, position} = request.body;
+  const { name, position } = request.body;
   Player.create({
-      name, position
+      name,
+      position,
   })
       .then(player => response.json(player))
       .catch(err => response.status(400).json(err));

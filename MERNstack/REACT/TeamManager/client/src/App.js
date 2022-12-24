@@ -5,6 +5,8 @@ import Detail from './views/Detail';
 import Update from './views/Update';
 import CreatePlayer from './views/CreatePlayer';
 
+
+
 function App() {
     return (
     <div className="App">
