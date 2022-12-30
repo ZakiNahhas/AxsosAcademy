@@ -13,6 +13,7 @@ const Luke2 = (props) => {
         setResponseData(response.data);
         setLoaded(true);
         setError("")
+        console.log("zzzzakiii")
       })
       .catch((err) => setError("error"));
   }, [props.id, props.opt]);
